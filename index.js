@@ -87,6 +87,24 @@ app.delete("/mading/:id", (req, res) => {
   });
 });
 
+app.put("/mading", (req, res) => {
+  const id = req.body.id_mading;
+  const judul_mading = req.body.judul_mading;
+  const isi_mading = req.body.isi_mading;
+
+  console.log(req.body);
+  const VALUES = {
+    judul_mading,
+    isi_mading,
+  };
+
+  const sqlQuery = `UPDATE mading SET ? WHERE id_mading = ${id}`;
+  // const sqlQuery = `UPDATE mading SET judul_mading = '${judul_mading}', isi_mading = '${isi_mading}' WHERE mading.id_mading = ${id}`;
+  con.query(sqlQuery, VALUES, (err, rows) => {
+    res.json();
+  });
+});
+
 app.get("/komentar/:id", (req, res) => {
   const id = req.params.id;
 
