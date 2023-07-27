@@ -99,9 +99,16 @@ app.put("/mading", (req, res) => {
   };
 
   const sqlQuery = `UPDATE mading SET ? WHERE id_mading = ${id}`;
-  // const sqlQuery = `UPDATE mading SET judul_mading = '${judul_mading}', isi_mading = '${isi_mading}' WHERE mading.id_mading = ${id}`;
   con.query(sqlQuery, VALUES, (err, rows) => {
     res.json();
+  });
+});
+
+app.get("/komentar", (req, res) => {
+  const sqlQuery = `SELECT * FROM komentar JOIN mading ON komentar.id_mading = mading.id_mading`;
+
+  con.query(sqlQuery, (err, rows) => {
+    res.json(rows);
   });
 });
 
@@ -119,13 +126,23 @@ app.get("/komentar/:id", (req, res) => {
   });
 });
 
+app.delete("/komentar/:id", (req, res) => {
+  const id = req.params.id;
+
+  const sqlQuery = `DELETE FROM komentar WHERE id_komentar = ${id}`;
+  con.query(sqlQuery, (err, rows) => {
+    res.json(rows);
+  });
+});
+
 app.post("/komentar", (req, res) => {
   const id_mading = req.body.id_mading;
+  const email_komen = req.body.email_komen;
   const nama_komen = req.body.nama_komen;
   const isi_komen = req.body.isi_komen;
 
   console.log(req.body);
-  const sqlQuery = `INSERT INTO komentar (id_mading, nama_komen, isi_komen) VALUES (${id_mading}, '${nama_komen}', '${isi_komen}')`;
+  const sqlQuery = `INSERT INTO komentar (id_mading, email_komen, nama_komen, isi_komen) VALUES (${id_mading}, '${email_komen}', '${nama_komen}', '${isi_komen}')`;
 
   con.query(sqlQuery, (err, rows) => {
     try {
@@ -135,3 +152,19 @@ app.post("/komentar", (req, res) => {
     }
   });
 });
+
+app.get("/laporan", (req, res) => {
+  const sqlQuery = `SELECT * FROM mading`;
+
+  con.query(sqlQuery, (err, rows) => {
+    console.log({rows})
+    
+    // const queryKomen = `SELECT * FROM komentar WHERE id_mading = ${rows.id_mading}`
+    // con.query(queryKomen, (err, rows) => {
+    //   res.json(rows)
+    // })
+    
+    res.json(rows);
+  });
+});
+
