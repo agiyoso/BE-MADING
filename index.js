@@ -64,10 +64,11 @@ app.get("/mading/:id", (req, res) => {
 app.post("/mading", (req, res) => {
   const judul_mading = req.body.judul_mading;
   const isi_mading = req.body.isi_mading;
+  const status_komentar = req.body.status_komentar;
 
   console.log(req.body);
 
-  const sqlQuery = `INSERT INTO mading (judul_mading, isi_mading) VALUES ('${judul_mading}', '${isi_mading}')`;
+  const sqlQuery = `INSERT INTO mading (judul_mading, isi_mading, status_komentar) VALUES ('${judul_mading}', '${isi_mading}', '${status_komentar}')`;
 
   con.query(sqlQuery, (err, rows) => {
     try {
@@ -91,11 +92,13 @@ app.put("/mading", (req, res) => {
   const id = req.body.id_mading;
   const judul_mading = req.body.judul_mading;
   const isi_mading = req.body.isi_mading;
+  const status_komentar = req.body.status_komentar;
 
   console.log(req.body);
   const VALUES = {
     judul_mading,
     isi_mading,
+    status_komentar,
   };
 
   const sqlQuery = `UPDATE mading SET ? WHERE id_mading = ${id}`;
@@ -141,8 +144,12 @@ app.post("/komentar", (req, res) => {
   const nama_komen = req.body.nama_komen;
   const isi_komen = req.body.isi_komen;
 
+  // const VALUES = [id_mading, email_komen, nama_komen, isi_komen];
+
   console.log(req.body);
   const sqlQuery = `INSERT INTO komentar (id_mading, email_komen, nama_komen, isi_komen) VALUES (${id_mading}, '${email_komen}', '${nama_komen}', '${isi_komen}')`;
+
+  // const sqlQuery = `INSERT INTO komentar SET ?`;
 
   con.query(sqlQuery, (err, rows) => {
     try {
@@ -157,14 +164,13 @@ app.get("/laporan", (req, res) => {
   const sqlQuery = `SELECT * FROM mading`;
 
   con.query(sqlQuery, (err, rows) => {
-    console.log({rows})
-    
+    console.log({ rows });
+
     // const queryKomen = `SELECT * FROM komentar WHERE id_mading = ${rows.id_mading}`
     // con.query(queryKomen, (err, rows) => {
     //   res.json(rows)
     // })
-    
+
     res.json(rows);
   });
 });
-
