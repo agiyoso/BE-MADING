@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2023 at 12:28 PM
+-- Generation Time: Jan 10, 2024 at 01:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `email`, `password`) VALUES
-(1, 'Mimin Galang', 'admin@gmail.com', 'admin123');
+(1, 'admin agi', 'admin@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -50,6 +50,7 @@ INSERT INTO `admin` (`id_admin`, `username`, `email`, `password`) VALUES
 CREATE TABLE `komentar` (
   `id_komentar` int(5) NOT NULL,
   `id_mading` int(5) NOT NULL,
+  `email_komen` varchar(25) NOT NULL,
   `nama_komen` varchar(50) NOT NULL,
   `isi_komen` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -58,9 +59,8 @@ CREATE TABLE `komentar` (
 -- Dumping data for table `komentar`
 --
 
-INSERT INTO `komentar` (`id_komentar`, `id_mading`, `nama_komen`, `isi_komen`) VALUES
-(1, 1, 'Dadang', 'mantap min'),
-(2, 1, 'Faizi', 'GG');
+INSERT INTO `komentar` (`id_komentar`, `id_mading`, `email_komen`, `nama_komen`, `isi_komen`) VALUES
+(6, 7, 'agung@gmail,com', 'AgunGG', 'mantap kodog 😋');
 
 -- --------------------------------------------------------
 
@@ -71,15 +71,17 @@ INSERT INTO `komentar` (`id_komentar`, `id_mading`, `nama_komen`, `isi_komen`) V
 CREATE TABLE `mading` (
   `id_mading` int(11) NOT NULL,
   `judul_mading` varchar(50) NOT NULL,
-  `isi_mading` varchar(250) NOT NULL
+  `isi_mading` varchar(250) NOT NULL,
+  `status_komentar` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mading`
 --
 
-INSERT INTO `mading` (`id_mading`, `judul_mading`, `isi_mading`) VALUES
-(1, 'Classmeeting 2023', 'Info classmeeting 2023');
+INSERT INTO `mading` (`id_mading`, `judul_mading`, `isi_mading`, `status_komentar`) VALUES
+(6, 'tessqdwqdq', 'qdwqdqd', 'Mati'),
+(7, 'Kodog', 'tes tes dong', 'Hidup');
 
 --
 -- Indexes for dumped tables
@@ -118,13 +120,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id_komentar` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_komentar` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `mading`
 --
 ALTER TABLE `mading`
-  MODIFY `id_mading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_mading` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
